@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 600,
+  "title": "COVID-19 Cases per Country (13 Oct 2020)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/angeltjo/week10-homework/main/data/wagegapvswomenintopincome.csv"
+  },
+  "params": [
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 50000000,
+        "step": 100000,
+        "name": "Minimum Population: "
+      }
+    }
+  ],
+  "transform": [{"filter": "datum.Population > Population_Above"}],
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "x": {
+          "field": "WageGap",
+          "type": "quantitative",
+          "title": "Gender Wage Gap (%)",
+          "axis": {"tickCount": 5},
+          "scale": {"domain": [5, 25]}
+        },
+        "y": {
+          "field": "WomenInTop5",
+          "type": "quantitative",
+          "title": "Share of Women in the Top 5% (%)",
+          "axis": {"tickCount": 3},
+          "scale": {"domain": [15, 30]}
+        },
+        "color": {"field": "Entity", "type": "nominal"},
+        "size": {
+          "field": "Population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [5000000, 10000000, 25000000, 50000000],
+            "range": [100, 300, 400, 600, 1000]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "tooltip": [
+          {"field": "Entity", "type": "nominal", "title": "Country"},
+          {
+            "field": "WageGap",
+            "type": "quantitative",
+            "title": "Gender Wage Gap"
+          },
+          {
+            "field": "WomenInTop5",
+            "type": "quantitative",
+            "title": "Share of Women in Top 5%"
+          },
+          {"field": "Population", "type": "quantitative"}
+        ]
+      }
+    }
+  ]
+}
