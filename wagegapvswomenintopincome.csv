@@ -1,4 +1,4 @@
-Entity,Year,Gender.wage.gap..OECD.2017.,Share.of.women.in.top.5.,Population..historical.estimates.
+Entity,Year,WageGap,WomenInTop5,Population
 Australia,2006,16.7,23.4,20467032
 Canada,2006,21.1,23.6,32531864
 Denmark,2006,10.2,20.4,5457863
