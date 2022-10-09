@@ -20,24 +20,26 @@
     }
   ],
   "transform": [{"filter": "datum.Population > Population_Above"}],
-  "layer": [
-    {
-      "mark": "circle",
-      "encoding": {
-        "x": {
-          "field": "WageGap",
-          "type": "quantitative",
-          "title": "Gender Wage Gap (%)",
-          "axis": {"tickCount": 5},
-          "scale": {"domain": [5, 25]}
-        },
-        "y": {
-          "field": "WomenInTop5",
+  "encoding": {
+    "x": {
+      "field": "WageGap",
+      "type": "quantitative",
+      "title": "Gender Wage Gap (%)",
+      "axis": {"tickCount": 5},
+      "scale": {"domain": [5, 25]}
+    },
+    "y": {
+      "field": "WomenInTop5",
           "type": "quantitative",
           "title": "Share of Women in the Top 5% (%)",
           "axis": {"tickCount": 3},
           "scale": {"domain": [15, 30]}
-        },
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
         "color": {"field": "Entity", "type": "nominal"},
         "size": {
           "field": "Population",
@@ -48,6 +50,41 @@
             "range": [100, 300, 400, 600, 1000]
           },
           "legend": {"format": ".1s"}
+        },
+        "tooltip": [
+          {"field": "Entity", "type": "nominal", "title": "Country"},
+          {
+            "field": "WageGap",
+            "type": "quantitative",
+            "title": "Gender Wage Gap"
+          },
+          {
+            "field": "WomenInTop5",
+            "type": "quantitative",
+            "title": "Share of Women in Top 5%"
+          },
+          {"field": "Population", "type": "quantitative"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Entity", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Entity'] == 'Italy' || datum['Entity'] == 'United Kingdom' || datum['Entity'] == 'Spain'",
+            "value": 1
+          },
+          "value": 0
         },
         "tooltip": [
           {"field": "Entity", "type": "nominal", "title": "Country"},
